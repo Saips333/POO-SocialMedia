@@ -20,6 +20,4 @@ public abstract class Recurso {
 
     public abstract boolean validaUrlRecurso();
 
-   
-
 }

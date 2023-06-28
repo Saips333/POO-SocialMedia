@@ -1,23 +1,26 @@
 package main.models;
 
-public class Foto extends Recurso {
-    private String resolucao;
+public class Foto {
+    private String nome;
 
-    public Foto(String urlRecurso, String resolucao) {
-        super(urlRecurso);
-        this.resolucao = resolucao;
+    public Foto(String nome) {
+        this.nome = nome;
     }
 
-    public String getResolucao() {
-        return resolucao;
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     @Override
-    public boolean validaUrlRecurso() {
-        String extensao = getUrlRecurso().substring(getUrlRecurso().lastIndexOf('.'));
-        return extensao.equalsIgnoreCase(".jpg") || extensao.equalsIgnoreCase(".png") || extensao.equalsIgnoreCase(".bmp");
+    public String toString() {
+        return "Foto{" +
+                "nome='" + nome + '\'' +
+                '}';
     }
-
-   
 }
+
 
