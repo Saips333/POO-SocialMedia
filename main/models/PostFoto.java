@@ -32,17 +32,20 @@ public class PostFoto implements Postavel {
         if (qtdeFotos >= 1 && qtdeFotos <= 10) {
             dataPostagem = LocalDateTime.now();
             return true;
+        } else {
+            throw new IllegalArgumentException("Erro ao postar a foto: quantidade de fotos inválida");
         }
-        return false;
     }
 
-     @Override
+    @Override
     public boolean comenta(String mensagem) {
+        if (mensagem == null || mensagem.isEmpty()) {
+            throw new IllegalArgumentException("Erro ao adicionar o comentário: mensagem vazia");
+        }
         Comentario comentario = new Comentario(LocalDateTime.now(), mensagem);
         listaComentarios.add(comentario);
         return true;
     }
-
 
     public LocalDateTime getDataPostagem() {
         return dataPostagem;
@@ -64,12 +67,14 @@ public class PostFoto implements Postavel {
     public String toString() {
         return "PostFoto{" +
                 "qtdeFotos=" + qtdeFotos +
-                 fotos +
-                 dataPostagem +
-                 listaComentarios +
+                ", fotos=" + fotos +
+                ", dataPostagem=" + dataPostagem +
+                ", listaComentarios=" + listaComentarios +
                 '}';
     }
 }
+
+
 
 
 

@@ -24,12 +24,16 @@ public class PostVideo implements Postavel {
         if (video != null) {
             dataPostagem = LocalDateTime.now();
             return true;
+        } else {
+            throw new IllegalArgumentException("Erro ao postar o vídeo: vídeo não atribuído");
         }
-        return false;
     }
 
     @Override
     public boolean comenta(String mensagem) {
+        if (mensagem == null || mensagem.isEmpty()) {
+            throw new IllegalArgumentException("Erro ao adicionar o comentário: mensagem vazia");
+        }
         Comentario comentario = new Comentario(LocalDateTime.now(), mensagem);
         listaComentarios.add(comentario);
         return true;
@@ -60,5 +64,6 @@ public class PostVideo implements Postavel {
                 '}';
     }
 }
+
 
 
