@@ -7,7 +7,7 @@ public class Main {
         try {
             // Tentativa de postagem do tipo texto
             Postavel postTexto = PostavelFactory.getPostavel("POSTEXTO");
-            postTexto.posta(); // Deve retornar um erro, pois nao se trata de um formato de post aceito
+            postTexto.posta(); // Deve retornar um erro, pois não se trata de um formato de post aceito
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage()+ "\n");
         }
@@ -43,11 +43,11 @@ public class Main {
         try {
             // Tentativa de postagem com 5 fotos atribuídas
             Postavel postCincoFotos = PostavelFactory.getPostavel("POSTFOTO");
-            ((PostFoto) postCincoFotos).adicionaFoto(new Foto("foto1.jpg"));
-            ((PostFoto) postCincoFotos).adicionaFoto(new Foto("foto2.jpg"));
-            ((PostFoto) postCincoFotos).adicionaFoto(new Foto("foto3.jpg"));
-            ((PostFoto) postCincoFotos).adicionaFoto(new Foto("foto4.jpg"));
-            ((PostFoto) postCincoFotos).adicionaFoto(new Foto("foto5.jpg"));
+            ((PostFoto) postCincoFotos).adicionaFoto(new Foto("foto1.jpg", "800x600"));
+            ((PostFoto) postCincoFotos).adicionaFoto(new Foto("foto2.jpg", "800x600"));
+            ((PostFoto) postCincoFotos).adicionaFoto(new Foto("foto3.jpg", "800x600"));
+            ((PostFoto) postCincoFotos).adicionaFoto(new Foto("foto4.jpg", "800x600"));
+            ((PostFoto) postCincoFotos).adicionaFoto(new Foto("foto5.jpg", "800x600"));
             postCincoFotos.posta(); // Deve ser publicado com sucesso
             System.out.println("Postagem com 5 fotos publicada com sucesso!" + "\n");
             System.out.println(postCincoFotos.toString()+ "\n");
@@ -59,7 +59,7 @@ public class Main {
             // Tentativa de postagem com 11 fotos atribuídas
             Postavel postOnzeFotos = PostavelFactory.getPostavel("POSTFOTO");
             for (int i = 0; i < 11; i++) {
-                ((PostFoto) postOnzeFotos).adicionaFoto(new Foto("foto.jpg"));
+                ((PostFoto) postOnzeFotos).adicionaFoto(new Foto("foto.jpg", "800x600"));
             }
             postOnzeFotos.posta(); // Deve retornar um erro, pois excede o limite de 10 fotos
         } catch (Exception e) {
@@ -69,7 +69,7 @@ public class Main {
         try {
             // Tentativa de criação de comentário em uma postagem com foto
             Postavel postComentarioFoto = PostavelFactory.getPostavel("POSTFOTO");
-            ((PostFoto) postComentarioFoto).adicionaFoto(new Foto("foto.jpg"));
+            ((PostFoto) postComentarioFoto).adicionaFoto(new Foto("foto.jpg", "800x600"));
             postComentarioFoto.posta();
             postComentarioFoto.comenta("teste1"); // Deve criar um comentário com sucesso
             System.out.println("Comentário adicionado com sucesso na postagem com foto!"+ "\n");
@@ -102,7 +102,7 @@ public class Main {
 
         try {
             // Tentativa de criação de foto inválida
-            Foto fotoInvalida = new Foto("foto.tiff");
+            Foto fotoInvalida = new Foto("foto.tiff", "800x600");
             Postavel postFotoInvalida = PostavelFactory.getPostavel("POSTFOTO");
             ((PostFoto) postFotoInvalida).adicionaFoto(fotoInvalida);
             postFotoInvalida.posta(); // Deve retornar um erro, pois a extensão da foto é inválida

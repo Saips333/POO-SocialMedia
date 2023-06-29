@@ -1,47 +1,47 @@
 package main.models;
 
-public class Video {
-    private String nome;
+public class Video extends Recurso {
+    private int frameRate;
     private int duracao;
-    private int tamanho;
 
-    public Video(String nome, int duracao, int tamanho) {
-        this.nome = nome;
+    public Video(String urlRecurso, int frameRate, int duracao) throws IllegalArgumentException {
+        super(urlRecurso);
+        this.frameRate = frameRate;
         this.duracao = duracao;
-        this.tamanho = tamanho;
+        if (!validaUrlRecurso()) {
+            throw new IllegalArgumentException("URL do recurso inválida: " + urlRecurso);
+        }
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
+    public int getFrameRate() {
+        return frameRate;
     }
 
     public int getDuracao() {
         return duracao;
     }
 
-    public void setDuracao(int duracao) {
-        this.duracao = duracao;
-    }
-
-    public int getTamanho() {
-        return tamanho;
-    }
-
-    public void setTamanho(int tamanho) {
-        this.tamanho = tamanho;
+    @Override
+    public boolean validaUrlRecurso() {
+        String[] validExtensions = {".mp4", ".mov", ".wmv"};
+        String urlRecurso = getUrlRecurso();
+        for (String extension : validExtensions) {
+            if (urlRecurso.endsWith(extension)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public String toString() {
         return "Video{" +
-                "nome='" + nome + '\'' +
+                "urlRecurso='" + getUrlRecurso() + '\'' +
+                ", frameRate=" + frameRate +
                 ", duracao=" + duracao +
-                ", tamanho=" + tamanho +
                 '}';
     }
 }
+
+
 
