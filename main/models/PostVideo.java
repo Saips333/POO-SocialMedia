@@ -2,17 +2,20 @@ package main.models;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class PostVideo implements Postavel {
     private Video video;
     private LocalDateTime dataPostagem;
     private List<Comentario> listaComentarios;
+    private int qtdeFixados;
 
     public PostVideo() {
         this.video = null;
         this.dataPostagem = null;
         this.listaComentarios = new ArrayList<>();
+        this.qtdeFixados = 0;
     }
 
     public void adicionaVideo(Video video) {
@@ -39,6 +42,20 @@ public class PostVideo implements Postavel {
         return true;
     }
 
+    public void fixaComentario(Comentario comentario) {
+        if (!comentario.isFixado()) {
+            comentario.setFixado(true);
+            qtdeFixados++;
+        }
+    }
+
+    public void desfixaComentario(Comentario comentario) {
+        if (comentario.isFixado()) {
+            comentario.setFixado(false);
+            qtdeFixados--;
+        }
+    }
+
     public LocalDateTime getDataPostagem() {
         return dataPostagem;
     }
@@ -48,11 +65,20 @@ public class PostVideo implements Postavel {
     }
 
     public List<Comentario> getListaComentarios() {
+        listaComentarios.sort(Comparator.comparing(Comentario::isFixado).reversed());
         return listaComentarios;
     }
 
     public void setListaComentarios(List<Comentario> listaComentarios) {
         this.listaComentarios = listaComentarios;
+    }
+
+    public int getQtdeFixados() {
+        return qtdeFixados;
+    }
+
+    public void setQtdeFixados(int qtdeFixados) {
+        this.qtdeFixados = qtdeFixados;
     }
 
     @Override
@@ -61,9 +87,12 @@ public class PostVideo implements Postavel {
                 "video=" + video +
                 ", dataPostagem=" + dataPostagem +
                 ", listaComentarios=" + listaComentarios +
+                ", qtdeFixados=" + qtdeFixados +
                 '}';
     }
 }
+
+
 
 
 

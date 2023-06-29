@@ -1,5 +1,7 @@
 package main;
 
+import java.util.List;
+
 import main.models.*;
 
 public class Main {
@@ -109,8 +111,34 @@ public class Main {
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage()+ "\n");
         }
+
+        try {
+            // Tentativa de fixar comentários
+            Postavel postFixaComentarios = PostavelFactory.getPostavel("POSTFOTO");
+            ((PostFoto) postFixaComentarios).adicionaFoto(new Foto("foto.jpg", "800x600"));
+            postFixaComentarios.posta();
+            postFixaComentarios.comenta("Comentário 1");
+            postFixaComentarios.comenta("Comentário 2");
+            postFixaComentarios.comenta("Comentário 3");
+            postFixaComentarios.comenta("Comentário 4");
+            postFixaComentarios.comenta("Comentário 5");
+
+            // Fixar os dois ultimos comentários
+             List<Comentario> comentarios = ((PostFoto) postFixaComentarios).getListaComentarios();
+             int size = comentarios.size();
+             Comentario comentario1 = comentarios.get(size-2);
+             Comentario comentario2 = comentarios.get(size-1);
+             ((PostFoto) postFixaComentarios).fixaComentario(comentario1);
+             ((PostFoto) postFixaComentarios).fixaComentario(comentario2);
+
+            System.out.println("Comentários fixados com sucesso!"+ "\n");
+            System.out.println(postFixaComentarios.toString()+ "\n");
+        } catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage()+ "\n");
+        }
     }
 }
+
 
 
 

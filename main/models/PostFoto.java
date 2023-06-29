@@ -2,19 +2,24 @@ package main.models;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class PostFoto implements Postavel {
     private int qtdeFotos;
     private List<Foto> fotos;
+    private String localizacao;
     private LocalDateTime dataPostagem;
     private List<Comentario> listaComentarios;
+    private int qtdeFixados;
 
     public PostFoto() {
         this.qtdeFotos = 0;
         this.fotos = new ArrayList<>();
+        this.localizacao = null;
         this.dataPostagem = null;
         this.listaComentarios = new ArrayList<>();
+        this.qtdeFixados = 0;
     }
 
     public void adicionaFoto(Foto foto) {
@@ -47,6 +52,34 @@ public class PostFoto implements Postavel {
         return true;
     }
 
+    public void fixaComentario(Comentario comentario) {
+        if (!comentario.isFixado()) {
+            comentario.setFixado(true);
+            qtdeFixados++;
+            rearrangeComentarios();
+        }
+    }
+
+    public void desfixaComentario(Comentario comentario) {
+        if (comentario.isFixado()) {
+            comentario.setFixado(false);
+            qtdeFixados--;
+            rearrangeComentarios();
+        }
+    }
+    
+    private void rearrangeComentarios() {
+        listaComentarios.sort(Comparator.comparing(Comentario::isFixado).reversed());
+    }
+
+    public String getLocalizacao() {
+        return localizacao;
+    }
+
+    public void setLocalizacao(String localizacao) {
+        this.localizacao = localizacao;
+    }
+
     public LocalDateTime getDataPostagem() {
         return dataPostagem;
     }
@@ -61,6 +94,23 @@ public class PostFoto implements Postavel {
 
     public void setListaComentarios(List<Comentario> listaComentarios) {
         this.listaComentarios = listaComentarios;
+        rearrangeComentarios();
+    }
+
+    public int getQtdeFotos() {
+        return qtdeFotos;
+    }
+
+    public void setQtdeFotos(int qtdeFotos) {
+        this.qtdeFotos = qtdeFotos;
+    }
+
+    public int getQtdeFixados() {
+        return qtdeFixados;
+    }
+
+    public void setQtdeFixados(int qtdeFixados) {
+        this.qtdeFixados = qtdeFixados;
     }
 
     @Override
@@ -68,8 +118,10 @@ public class PostFoto implements Postavel {
         return "PostFoto{" +
                 "qtdeFotos=" + qtdeFotos +
                 ", fotos=" + fotos +
+                ", localizacao='" + localizacao + '\'' +
                 ", dataPostagem=" + dataPostagem +
                 ", listaComentarios=" + listaComentarios +
+                ", qtdeFixados=" + qtdeFixados +
                 '}';
     }
 }
