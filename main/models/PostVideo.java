@@ -34,7 +34,7 @@ public class PostVideo implements Postavel {
         if (mensagem == null || mensagem.isEmpty()) {
             throw new IllegalArgumentException("Erro ao adicionar o comentário: mensagem vazia");
         }
-        Comentario comentario = new Comentario(LocalDateTime.now(), mensagem);
+        Comentario comentario = new Comentario(LocalDateTime.now(), false, mensagem);
         listaComentarios.add(comentario);
         return true;
     }

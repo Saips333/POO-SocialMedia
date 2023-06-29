@@ -4,11 +4,15 @@ import java.time.LocalDateTime;
 
 public class Comentario {
     private LocalDateTime data;
-    private String mensagem;
+    private boolean fixado;
+    private int tamanho;
+    private String texto;
 
-    public Comentario(LocalDateTime data, String mensagem) {
+    public Comentario(LocalDateTime data, boolean fixado, String texto) {
         this.data = data;
-        this.mensagem = mensagem;
+        this.fixado = fixado;
+        this.texto = texto;
+        this.tamanho = texto.length();
     }
 
     public LocalDateTime getData() {
@@ -19,20 +23,36 @@ public class Comentario {
         this.data = data;
     }
 
-    public String getMensagem() {
-        return mensagem;
+    public boolean isFixado() {
+        return fixado;
     }
 
-    public void setMensagem(String mensagem) {
-        this.mensagem = mensagem;
+    public void setFixado(boolean fixado) {
+        this.fixado = fixado;
+    }
+
+    public int getTamanho() {
+        return tamanho;
+    }
+
+    public String getTexto() {
+        return texto;
+    }
+
+    public void setTexto(String texto) {
+        this.texto = texto;
+        this.tamanho = texto.length();
     }
 
     @Override
     public String toString() {
         return "Comentario{" +
                 "data=" + data +
-                ", mensagem='" + mensagem + '\'' +
+                ", fixado=" + fixado +
+                ", tamanho=" + tamanho +
+                ", texto='" + texto + '\'' +
                 '}';
     }
 }
+
 
