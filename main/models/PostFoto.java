@@ -36,12 +36,13 @@ public class PostFoto implements Postavel {
         return false;
     }
 
-    @Override
-    public boolean comenta() {
-        Comentario comentario = new Comentario(LocalDateTime.now(), "Mensagem do comentário");
+     @Override
+    public boolean comenta(String mensagem) {
+        Comentario comentario = new Comentario(LocalDateTime.now(), mensagem);
         listaComentarios.add(comentario);
         return true;
     }
+
 
     public LocalDateTime getDataPostagem() {
         return dataPostagem;

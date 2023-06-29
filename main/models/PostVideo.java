@@ -29,8 +29,8 @@ public class PostVideo implements Postavel {
     }
 
     @Override
-    public boolean comenta() {
-        Comentario comentario = new Comentario(LocalDateTime.now(), "Mensagem do comentário");
+    public boolean comenta(String mensagem) {
+        Comentario comentario = new Comentario(LocalDateTime.now(), mensagem);
         listaComentarios.add(comentario);
         return true;
     }
@@ -53,11 +53,12 @@ public class PostVideo implements Postavel {
 
     @Override
     public String toString() {
-        return "PostVideo{" 
-                 + video +
-                 dataPostagem +
-                 listaComentarios +
+        return "PostVideo{" +
+                "video=" + video +
+                ", dataPostagem=" + dataPostagem +
+                ", listaComentarios=" + listaComentarios +
                 '}';
     }
 }
+
 

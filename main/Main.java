@@ -71,7 +71,7 @@ public class Main {
         ((PostFoto) postComentarioFoto).adicionaFoto(new Foto("foto.jpg"));
         try {
             postComentarioFoto.posta();
-            postComentarioFoto.comenta(); // Deve criar um comentário com sucesso
+            postComentarioFoto.comenta("teste1"); // Deve criar um comentário com sucesso
             System.out.println("Comentário adicionado com sucesso na postagem com foto!");
             System.out.println(postComentarioFoto.toString());
         } catch (Exception e) {
@@ -83,7 +83,7 @@ public class Main {
         ((PostVideo) postComentarioVideo).adicionaVideo(new Video("video.mp4", 30, 120));
         try {
             postComentarioVideo.posta();
-            postComentarioVideo.comenta(); // Deve criar um comentário com sucesso
+            postComentarioVideo.comenta("teste2"); // Deve criar um comentário com sucesso
             System.out.println("Comentário adicionado com sucesso na postagem com vídeo!");
             System.out.println(postComentarioVideo.toString());
         } catch (Exception e) {
