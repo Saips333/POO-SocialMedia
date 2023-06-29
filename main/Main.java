@@ -113,29 +113,54 @@ public class Main {
         }
 
         try {
-            // Tentativa de fixar comentários
-            Postavel postFixaComentarios = PostavelFactory.getPostavel("POSTFOTO");
-            ((PostFoto) postFixaComentarios).adicionaFoto(new Foto("foto.jpg", "800x600"));
-            postFixaComentarios.posta();
-            postFixaComentarios.comenta("Comentário 1");
-            postFixaComentarios.comenta("Comentário 2");
-            postFixaComentarios.comenta("Comentário 3");
-            postFixaComentarios.comenta("Comentário 4");
-            postFixaComentarios.comenta("Comentário 5");
+            // Tentativa de fixar comentários 
+            Postavel postFixaComentariosFoto = PostavelFactory.getPostavel("POSTFOTO");
+            ((PostFoto) postFixaComentariosFoto).adicionaFoto(new Foto("foto.jpg", "800x600"));
+            postFixaComentariosFoto.posta();
+            postFixaComentariosFoto.comenta("Comentário 1");
+            postFixaComentariosFoto.comenta("Comentário 2");
+            postFixaComentariosFoto.comenta("Comentário 3");
+            postFixaComentariosFoto.comenta("Comentário 4");
+            postFixaComentariosFoto.comenta("Comentário 5");
 
             // Fixar os dois ultimos comentários
-             List<Comentario> comentarios = ((PostFoto) postFixaComentarios).getListaComentarios();
+             List<Comentario> comentarios = ((PostFoto) postFixaComentariosFoto).getListaComentarios();
              int size = comentarios.size();
              Comentario comentario1 = comentarios.get(size-2);
              Comentario comentario2 = comentarios.get(size-1);
-             ((PostFoto) postFixaComentarios).fixaComentario(comentario1);
-             ((PostFoto) postFixaComentarios).fixaComentario(comentario2);
+             ((PostFoto) postFixaComentariosFoto).fixaComentario(comentario1);
+             ((PostFoto) postFixaComentariosFoto).fixaComentario(comentario2);
 
             System.out.println("Comentários fixados com sucesso!"+ "\n");
-            System.out.println(postFixaComentarios.toString()+ "\n");
+            System.out.println(postFixaComentariosFoto.toString()+ "\n");
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage()+ "\n");
         }
+        try {
+            // Tentativa de fixar comentários em um PostVideo
+             Postavel postFixaComentariosVideo = PostavelFactory.getPostavel("POSTVIDEO");
+            ((PostVideo) postFixaComentariosVideo).adicionaVideo(new Video("video.mp4", 30, 120));
+            postFixaComentariosVideo.posta();
+            postFixaComentariosVideo.comenta("Comentário 1");
+            postFixaComentariosVideo.comenta("Comentário 2");
+            postFixaComentariosVideo.comenta("Comentário 3");
+            postFixaComentariosVideo.comenta("Comentário 4");
+            postFixaComentariosVideo.comenta("Comentário 5");
+
+            // Fixar os dois últimos comentários
+            List<Comentario> comentarios = ((PostVideo) postFixaComentariosVideo).getListaComentarios();
+            int size = comentarios.size();
+            Comentario comentario1 = comentarios.get(size - 2);
+            Comentario comentario2 = comentarios.get(size - 1);
+            ((PostVideo) postFixaComentariosVideo).fixaComentario(comentario1);
+            ((PostVideo) postFixaComentariosVideo).fixaComentario(comentario2);
+
+            System.out.println("Comentários fixados com sucesso!\n");
+            System.out.println(postFixaComentariosVideo.toString() + "\n");
+        } catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage() + "\n");
+        }
+
     }
 }
 

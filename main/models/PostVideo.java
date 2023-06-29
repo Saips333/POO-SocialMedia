@@ -46,14 +46,19 @@ public class PostVideo implements Postavel {
         if (!comentario.isFixado()) {
             comentario.setFixado(true);
             qtdeFixados++;
+            rearrangeComentarios();
         }
     }
 
     public void desfixaComentario(Comentario comentario) {
         if (comentario.isFixado()) {
             comentario.setFixado(false);
+            rearrangeComentarios();
             qtdeFixados--;
         }
+    }
+     private void rearrangeComentarios() {
+        listaComentarios.sort(Comparator.comparing(Comentario::isFixado).reversed());
     }
 
     public LocalDateTime getDataPostagem() {
@@ -65,7 +70,6 @@ public class PostVideo implements Postavel {
     }
 
     public List<Comentario> getListaComentarios() {
-        listaComentarios.sort(Comparator.comparing(Comentario::isFixado).reversed());
         return listaComentarios;
     }
 
